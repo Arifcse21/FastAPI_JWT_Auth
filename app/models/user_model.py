@@ -9,8 +9,10 @@ class Base(DeclarativeBase):
 
 
 class User(Base):
-    __table__ = "User"
+    __tablename__ = "User"
     id: Mapped[int] = mapped_column(primary_key=True)
-    uuid: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True))
+    uuid: Mapped[UUID] = mapped_column(UUID(as_uuid=True))
     fullname: Mapped[str]
-    email: Mapped
+    email: Mapped[str]
+    phone: Mapped[str]
+    password: Mapped[str]
