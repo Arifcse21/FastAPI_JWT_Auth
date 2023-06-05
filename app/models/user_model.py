@@ -14,3 +14,4 @@ class User(Base):
     uuid: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True))
     fullname: Mapped[str]
     email: Mapped[str]
+    phone: Mapped[str]
