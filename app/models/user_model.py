@@ -15,3 +15,4 @@ class User(Base):
     fullname: Mapped[str]
     email: Mapped[str]
     phone: Mapped[str]
+    password: Mapped[str]
