@@ -15,6 +15,7 @@ def register_user(user: UserSchema):
     user_uuid = str(uuid4())
     print(type(user_uuid))
     new_user = User(
+        username = user.username,
         fullname = user.fullname,
         uuid = str(user_uuid),
         email = user.email,
