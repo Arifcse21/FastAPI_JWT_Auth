@@ -12,8 +12,9 @@ register_user_router = APIRouter()
 
 @register_user_router.post("/user/register/", tags=["users"], status_code=status.HTTP_201_CREATED)
 def register_user(user: UserSchema):
-    user_uuid = str(uuid4())
-    print(type(user_uuid))
+    user_uuid = uuid4()
+
+    # TODO: Check if the username alredy exists in the db
     new_user = User(
         username = user.username,
         fullname = user.fullname,
@@ -22,11 +23,9 @@ def register_user(user: UserSchema):
         phone = user.phone,
         password = str(hash_password(user.password))
     )
-
-    
     
     try:
-        access_token = AccessTokenUtil.generate_access_token(user_uuid)
+        access_token = AccessTokenUtil.generate_access_token(str(user_uuid))
         # refresh_token = RefreshTokenUtil.generate_refresh_token(user_uuid)
         session.add(new_user)
         session.commit()
