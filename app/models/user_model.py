@@ -12,6 +12,7 @@ class User(Base):
     __tablename__ = "User"
     id: Mapped[int] = mapped_column(primary_key=True)
     uuid: Mapped[UUID] = mapped_column(UUID(as_uuid=True))
+    username: Mapped[str] = mapped_column(unique=True)
     fullname: Mapped[str]
     email: Mapped[str]
     phone: Mapped[str]
