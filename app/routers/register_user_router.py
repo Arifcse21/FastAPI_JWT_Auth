@@ -2,6 +2,7 @@ from fastapi import APIRouter, status
 from app.utils import Database, AccessTokenUtil, RefreshTokenUtil, hash_password
 from app.models import Base, User
 from app.schemas import UserSchema
+from sqlalchemy import select
 from uuid import uuid4
 
 
@@ -14,7 +15,14 @@ register_user_router = APIRouter()
 def register_user(user: UserSchema):
     user_uuid = uuid4()
 
-    # TODO: Check if the username alredy exists in the db
+    chk_user = select(User).filter(User.username == user.username)
+    if not len(session.execute(chk_user).fetchall()):
+        return {
+            "response": "failed",
+            "status_code": status.HTTP_400_BAD_REQUEST,
+            "message": "username is already taken",  # same as all girls are taken, baler life
+        }
+    
     new_user = User(
         username = user.username,
         fullname = user.fullname,
