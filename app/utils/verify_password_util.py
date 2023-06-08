@@ -1,8 +1,7 @@
 import hashlib, binascii
 
 
-def check_password(email, password):
-    hashed_password = 000  # TODO: check password from db
+def verify_password(password, hashed_password):
     # Extract the salt and stored password hash from the hashed password
     salt = hashed_password[:64].encode('ascii')
     stored_password_hash = hashed_password[64:]
