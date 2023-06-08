@@ -16,7 +16,7 @@ def register_user(user: UserSchema):
     user_uuid = uuid4()
 
     chk_user = select(User).filter(User.username == user.username)
-    if not len(session.execute(chk_user).fetchall()):
+    if len(session.execute(chk_user).fetchall()):
         return {
             "response": "failed",
             "status_code": status.HTTP_400_BAD_REQUEST,
