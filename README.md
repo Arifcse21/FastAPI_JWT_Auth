@@ -13,3 +13,14 @@ In this project, PostgreSQL database is used. I deployed the database on docker.
 
 `pip install -r requirements.txt`
 
+### Run the `Gunicorn` server
+
+`python main.py`
+
+### Swagger api gateway
+
+`http://128.0.0.1:8081/docs/`
+
+### Redoc api documentation
+
+`http://128.0.0.1:8081/redoc/`
