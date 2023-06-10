@@ -17,3 +17,15 @@ class User(Base):
     email: Mapped[str]= mapped_column(unique=True)
     phone: Mapped[str]
     password: Mapped[str]
+
+
+    def __repr__(self) -> str:
+        return f"""User(
+            id={self.id!r},
+            uuid={self.uuid!r},
+            username={self.username!r},
+            fullname={self.fullname!r},
+            email={self.email!r},
+            phone={self.phone!r}
+        )"""
+    
