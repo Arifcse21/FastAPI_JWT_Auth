@@ -13,7 +13,7 @@ engine, session = db()
 login_user_router = APIRouter()
 
 
-@login_user_router.post("/user/login/", dependencies=[Depends(JWTBearer)], tags=["users"], status_code=status.HTTP_200_OK)
+@login_user_router.post("/user/login/", tags=["users"], status_code=status.HTTP_200_OK)
 def login_user(login: UserLoginSchema):
     email = login.email
     password = login.password
