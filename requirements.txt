@@ -3,3 +3,4 @@ pytest
 sqlalchemy
 psycopg2-binary
 PyJWT
+python-dotenv
