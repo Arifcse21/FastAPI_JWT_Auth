@@ -1,4 +1,4 @@
-from sqlalchemy.orm import DeclarativeBase, mapped_column, Mapped
+from sqlalchemy.orm import DeclarativeBase, mapped_column, Mapped, relationship
 from sqlalchemy import String
 from sqlalchemy.types import UUID
 import uuid
@@ -18,6 +18,9 @@ class User(Base):
     phone: Mapped[str]
     password: Mapped[str]
 
+    # Define relationship(s)
+    profile = relationship("UserProfile", uselist=False, back_populates="user")
+
 
     def __repr__(self) -> str:
         return f"""User(
@@ -26,6 +29,7 @@ class User(Base):
             username={self.username!r},
             fullname={self.fullname!r},
             email={self.email!r},
-            phone={self.phone!r}
+            phone={self.phone!r},
+            profile={self.profile!r}
         )"""
     
