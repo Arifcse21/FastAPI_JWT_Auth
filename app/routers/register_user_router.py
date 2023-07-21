@@ -33,15 +33,18 @@ def register_user(user: UserSchema):
     )
     
     try:
-        access_token = AccessTokenUtil.generate_access_token(str(user_uuid))
-        # refresh_token = RefreshTokenUtil.generate_refresh_token(user_uuid)
+        
+        # with session.begin():
         session.add(new_user)
-        session.commit()
-
-        session.refresh(new_user)
         new_profile = UserProfile(user=new_user)
         session.add(new_profile)
+
         session.commit()
+        session.refresh(new_user)
+        session.refresh(new_profile)
+
+        access_token = AccessTokenUtil.generate_access_token(str(user_uuid))
+        # refresh_token = RefreshTokenUtil.generate_refresh_token(user_uuid)
 
         response = {
             "response": "successful",
