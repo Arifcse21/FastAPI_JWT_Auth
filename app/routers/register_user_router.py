@@ -1,6 +1,6 @@
 from fastapi import APIRouter, status
 from app.utils import Database, AccessTokenUtil, RefreshTokenUtil, hash_password
-from app.models import Base, User
+from app.models import Base, User, UserProfile
 from app.schemas import UserSchema
 from sqlalchemy import select
 from uuid import uuid4
@@ -33,10 +33,18 @@ def register_user(user: UserSchema):
     )
     
     try:
+        
+        # with session.begin():
+        session.add(new_user)
+        new_profile = UserProfile(user=new_user)
+        session.add(new_profile)
+
+        session.commit()
+        session.refresh(new_user)
+        session.refresh(new_profile)
+
         access_token = AccessTokenUtil.generate_access_token(str(user_uuid))
         # refresh_token = RefreshTokenUtil.generate_refresh_token(user_uuid)
-        session.add(new_user)
-        session.commit()
 
         response = {
             "response": "successful",
